@@ -13,6 +13,16 @@
     <!-- BUTTONS -->
     <string name="btn_personal">Personal Approach</string>
     <string name="btn_required">Required Approach</string>
+    <string name="btn_search">Search</string>
+
+    <!-- HINT -->
+    <string name="hint_search">Search by name…</string>
+
+    <!-- ERRORS -->
+    <string name="error_access_denies">Access denied</string>
+    <string name="error_something_went_wrong">Something went wrong</string>
+    <string name="error_service_unavailable">Service unavailable</string>
+    <string name="error_invalid_host">Unable to connect host</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

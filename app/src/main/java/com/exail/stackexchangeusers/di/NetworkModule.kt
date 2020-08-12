@@ -2,6 +2,9 @@ package com.exail.stackexchangeusers.di
 
 import android.util.Log
 import com.exail.stackexchangeusers.BuildConfig
+import com.exail.stackexchangeusers.repository.UserApi
+import com.exail.stackexchangeusers.repository.UserRepository
+import com.exail.stackexchangeusers.repository.UserRepositoryImpl
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -18,13 +21,19 @@ import javax.inject.Singleton
 @InstallIn(ApplicationComponent::class)
 object NetworkModule {
 
+    @Provides
+    @Singleton
+    fun provideUserApi(okHttpClient: OkHttpClient, gson: Gson) =
+        createWebService<UserApi>(okHttpClient, gson, BuildConfig.BASE_URL)
+
+    @Provides
+    fun provideUserRepository(userApi: UserApi): UserRepository = UserRepositoryImpl(userApi)
 
 
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder().apply {
-            //TODO set required settings
             when (BuildConfig.DEBUG) {
                 true -> this.addInterceptor(getHttpLoggingInterceptor())
             }
@@ -37,7 +46,7 @@ object NetworkModule {
     }
 
     @Provides
-    fun provideGson() : Gson = GsonBuilder().setLenient().create()
+    fun provideGson(): Gson = GsonBuilder().setLenient().create()
 
     private fun getHttpLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {

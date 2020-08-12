@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.findNavController
 import com.exail.stackexchangeusers.R
 import com.exail.stackexchangeusers.base.FragmentBase
 import com.exail.stackexchangeusers.databinding.FragmentLandingBinding
@@ -13,7 +13,7 @@ import com.google.android.material.button.MaterialButton
 
 class LandingFragment : FragmentBase() {
 
-    private val navController by lazy { findNavController(this) }
+    private val navController by lazy { findNavController() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -27,6 +27,13 @@ android {
         }
     }
 
+    flavorDimensions "version"
+    productFlavors {
+        demo {
+            buildConfigField "String", "BASE_URL", "\"https://api.stackexchange.com/2.2/\""
+        }
+    }
+
     buildFeatures {
         dataBinding true
         viewBinding false
