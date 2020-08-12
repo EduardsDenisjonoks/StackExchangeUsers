@@ -1,3 +1,19 @@
 <resources>
+
     <string name="app_name">StackExchangeUsers</string>
+
+    <!-- TITLE -->
+    <string name="title_landing">Welcome!</string>
+    <string name="title_user_list">User List</string>
+    <string name="title_user">User</string>
+
+    <!-- TEXT -->
+    <string name="landing_message">Here will be small description</string>
+
+    <!-- BUTTONS -->
+    <string name="btn_personal">Personal Approach</string>
+    <string name="btn_required">Required Approach</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
