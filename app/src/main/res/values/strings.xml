@@ -10,6 +10,14 @@
     <!-- TEXT -->
     <string name="landing_message">Here will be small description</string>
 
+    <!-- LABELS -->
+    <string name="user_name">User Name:</string>
+    <string name="reputation">Reputation:</string>
+    <string name="badges">Badges:</string>
+    <string name="location">Location:</string>
+    <string name="age">Age:</string>
+    <string name="creation_date">Creation Date:</string>
+
     <!-- BUTTONS -->
     <string name="btn_personal">Personal Approach</string>
     <string name="btn_required">Required Approach</string>

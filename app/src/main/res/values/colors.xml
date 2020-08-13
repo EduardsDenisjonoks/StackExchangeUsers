@@ -41,4 +41,8 @@
     <color name="black_32o">#52000000</color>
     <color name="white_32o">#52ffffff</color>
 
+    <color name="bronze">#CD7F32</color>
+    <color name="silver">#AAA9AD</color>
+    <color name="gold">#FFD700</color>
+
 </resources>

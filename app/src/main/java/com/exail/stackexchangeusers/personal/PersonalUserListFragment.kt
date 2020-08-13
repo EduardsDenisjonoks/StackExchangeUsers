@@ -82,6 +82,11 @@ class PersonalUserListFragment : FragmentBase() {
     }
 
     private fun showUserDetails(user: User) {
-        navController.navigate(R.id.action_user_list_to_details)
+        navController.navigate(
+            PersonalUserListFragmentDirections.actionUserListToDetails(
+                user.userId,
+                user
+            )
+        )
     }
 }

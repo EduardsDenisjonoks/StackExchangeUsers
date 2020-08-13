@@ -6,4 +6,6 @@
     <dimen name="space_16">16dp</dimen>
     <dimen name="space_24">24dp</dimen>
 
+    <!-- IMAGES -->
+    <dimen name="profile_image">150dp</dimen>
 </resources>
