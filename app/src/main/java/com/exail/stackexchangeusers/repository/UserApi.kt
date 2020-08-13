@@ -2,6 +2,7 @@ package com.exail.stackexchangeusers.repository
 
 import com.exail.stackexchangeusers.models.DataResponse
 import com.exail.stackexchangeusers.models.User
+import io.reactivex.Observable
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -26,4 +27,15 @@ interface UserApi {
         @Query("sort") sort: String,
         @Query("site") site: String
     ): Response<DataResponse<User>>
+
+
+    @GET("users")
+    fun getUsersObservable(
+        @Query("page") page: Int,
+        @Query("pagesize") pageSize: Int,
+        @Query("order") order: String,
+        @Query("sort") sort: String,
+        @Query("inname") search: String,
+        @Query("site") site: String
+    ): Observable<DataResponse<User>>
 }
