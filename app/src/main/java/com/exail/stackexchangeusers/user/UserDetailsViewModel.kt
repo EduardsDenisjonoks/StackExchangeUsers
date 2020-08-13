@@ -1,12 +1,11 @@
 package com.exail.stackexchangeusers.user
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import com.exail.stackexchangeusers.core.network.ApiResult
 import com.exail.stackexchangeusers.models.User
 import com.exail.stackexchangeusers.repository.UserRepository
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -14,6 +13,8 @@ class UserDetailsViewModel @ViewModelInject constructor(private val userReposito
     ViewModel() {
     private val simpleDateFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
     private val userLiveData = MutableLiveData<User>()
+    private val loadingLiveData = MutableLiveData<Boolean>()
+    private val errorLiveData = MutableLiveData<Int>()
 
     val profileImageLiveData: LiveData<String>
     val nameLiveData: LiveData<String>
@@ -24,7 +25,6 @@ class UserDetailsViewModel @ViewModelInject constructor(private val userReposito
     val locationLiveData: LiveData<String>
     val ageLiveData: LiveData<String>
     val creationLiveData: LiveData<String>
-
 
     init {
         profileImageLiveData = Transformations.map(userLiveData) { user -> user.profileImage }
@@ -43,10 +43,25 @@ class UserDetailsViewModel @ViewModelInject constructor(private val userReposito
             Transformations.map(userLiveData) { user -> formatEpochTime(user.creationDate) }
     }
 
+    fun getLoadingLiveData(): LiveData<Boolean> = loadingLiveData
+
+    fun getErrorLiveData(): LiveData<Int> = errorLiveData
+
+    fun loadUser(userId: Int) {
+        loadingLiveData.value = true
+        viewModelScope.launch {
+            val result = userRepository.getUser(userId)
+            loadingLiveData.value = false
+            when (result) {
+                is ApiResult.Success -> setUser(result.data.first())
+                is ApiResult.Error -> errorLiveData.value = result.appError.errorResource
+            }
+        }
+    }
+
     fun setUser(user: User) {
         userLiveData.value = user
     }
-
 
     private fun setLocation(location: String?): String = location ?: "-"
 

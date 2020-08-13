@@ -11,230 +11,244 @@
             type="com.exail.stackexchangeusers.user.UserDetailsViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_profile_image"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/profile_image"
-            android:layout_margin="@dimen/space_16"
-            app:image_url="@{userViewModel.profileImageLiveData}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/backgrounds/scenic" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <!--region LABELS-->
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/label_user_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_16"
-            android:text="@string/user_name"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_profile_image" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/label_reputation"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_16"
-            android:text="@string/reputation"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_user_name" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_profile_image"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/profile_image"
+                    android:layout_margin="@dimen/space_16"
+                    app:image_url="@{userViewModel.profileImageLiveData}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@tools:sample/backgrounds/scenic" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/label_badges"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_16"
-            android:text="@string/badges"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_reputation" />
+                <!--region LABELS-->
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/label_user_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_16"
+                    android:text="@string/user_name"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_profile_image" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/label_location"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_16"
-            android:text="@string/location"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/badge_barrier" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/label_reputation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_16"
+                    android:text="@string/reputation"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/label_user_name" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/label_age"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_16"
-            android:text="@string/age"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_location" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/label_badges"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_16"
+                    android:text="@string/badges"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/label_reputation" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/label_creation_date"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_16"
-            android:text="@string/creation_date"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_age" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/label_location"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_16"
+                    android:text="@string/location"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/badge_barrier" />
 
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/label_barrier"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:barrierDirection="end"
-            app:constraint_referenced_ids="label_user_name,label_reputation,label_badges,label_location,label_age,label_creation_date" />
-        <!--endregion-->
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/label_age"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_16"
+                    android:text="@string/age"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/label_location" />
 
-        <!--region VALUES-->
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/value_user_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_16"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@{userViewModel.nameLiveData}"
-            app:layout_constraintBaseline_toBaselineOf="@+id/label_user_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/label_barrier"
-            tools:text="@tools:sample/full_names" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/label_creation_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_16"
+                    android:text="@string/creation_date"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/label_age"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/value_reputation"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_16"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@{userViewModel.reputationLiveData}"
-            app:layout_constraintBaseline_toBaselineOf="@+id/label_reputation"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/label_barrier"
-            tools:text="123" />
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/label_barrier"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:barrierDirection="end"
+                    app:constraint_referenced_ids="label_user_name,label_reputation,label_badges,label_location,label_age,label_creation_date" />
+                <!--endregion-->
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/value_location"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_16"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@{userViewModel.locationLiveData}"
-            app:layout_constraintBaseline_toBaselineOf="@+id/label_location"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/label_barrier"
-            tools:text="@tools:sample/cities" />
+                <!--region VALUES-->
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/value_user_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_16"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{userViewModel.nameLiveData}"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/label_user_name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/label_barrier"
+                    tools:text="@tools:sample/full_names" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/value_age"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_16"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@{userViewModel.ageLiveData}"
-            app:layout_constraintBaseline_toBaselineOf="@+id/label_age"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/label_barrier"
-            tools:text="23" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/value_reputation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_16"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{userViewModel.reputationLiveData}"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/label_reputation"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/label_barrier"
+                    tools:text="123" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/value_creation_date"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_16"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@{userViewModel.creationLiveData}"
-            app:layout_constraintBaseline_toBaselineOf="@+id/label_creation_date"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/label_barrier"
-            tools:text="@tools:sample/date/ddmmyy" />
-        <!--endregion-->
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/value_location"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_16"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{userViewModel.locationLiveData}"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/label_location"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/label_barrier"
+                    tools:text="@tools:sample/cities" />
 
-        <!--region BADGES -->
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/value_age"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_16"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{userViewModel.ageLiveData}"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/label_age"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/label_barrier"
+                    tools:text="23" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_bronze"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_16"
-            android:tint="@color/bronze"
-            app:layout_constraintEnd_toStartOf="@+id/iv_silver"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_badges"
-            app:srcCompat="@drawable/ic_trophy" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/value_creation_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_16"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{userViewModel.creationLiveData}"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/label_creation_date"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/label_barrier"
+                    tools:text="@tools:sample/date/ddmmyy" />
+                <!--endregion-->
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_silver"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_16"
-            android:tint="@color/silver"
-            app:layout_constraintEnd_toStartOf="@+id/iv_gold"
-            app:layout_constraintStart_toEndOf="@+id/iv_bronze"
-            app:layout_constraintTop_toBottomOf="@+id/label_badges"
-            app:srcCompat="@drawable/ic_trophy" />
+                <!--region BADGES -->
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_gold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_16"
-            android:tint="@color/gold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_silver"
-            app:layout_constraintTop_toBottomOf="@+id/label_badges"
-            app:srcCompat="@drawable/ic_trophy" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_bronze"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_16"
+                    android:tint="@color/bronze"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_silver"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/label_badges"
+                    app:srcCompat="@drawable/ic_trophy" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/value_bronze"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{userViewModel.bronzeCountLiveData}"
-            app:layout_constraintEnd_toEndOf="@+id/iv_bronze"
-            app:layout_constraintStart_toStartOf="@+id/iv_bronze"
-            app:layout_constraintTop_toBottomOf="@+id/iv_bronze"
-            tools:text="0" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_silver"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_16"
+                    android:tint="@color/silver"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_gold"
+                    app:layout_constraintStart_toEndOf="@+id/iv_bronze"
+                    app:layout_constraintTop_toBottomOf="@+id/label_badges"
+                    app:srcCompat="@drawable/ic_trophy" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/value_silver"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{userViewModel.silverCountLiveData}"
-            app:layout_constraintEnd_toEndOf="@+id/iv_silver"
-            app:layout_constraintStart_toStartOf="@+id/iv_silver"
-            app:layout_constraintTop_toBottomOf="@+id/iv_silver"
-            tools:text="0" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_gold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_16"
+                    android:tint="@color/gold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/iv_silver"
+                    app:layout_constraintTop_toBottomOf="@+id/label_badges"
+                    app:srcCompat="@drawable/ic_trophy" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/value_gold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{userViewModel.goldCountLiveData}"
-            app:layout_constraintEnd_toEndOf="@+id/iv_gold"
-            app:layout_constraintStart_toStartOf="@+id/iv_gold"
-            app:layout_constraintTop_toBottomOf="@+id/iv_gold"
-            tools:text="0" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/value_bronze"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{userViewModel.bronzeCountLiveData}"
+                    app:layout_constraintEnd_toEndOf="@+id/iv_bronze"
+                    app:layout_constraintStart_toStartOf="@+id/iv_bronze"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_bronze"
+                    tools:text="0" />
 
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/badge_barrier"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="value_bronze,value_silver,value_gold" />
-        <!--endregion -->
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/value_silver"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{userViewModel.silverCountLiveData}"
+                    app:layout_constraintEnd_toEndOf="@+id/iv_silver"
+                    app:layout_constraintStart_toStartOf="@+id/iv_silver"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_silver"
+                    tools:text="0" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/value_gold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{userViewModel.goldCountLiveData}"
+                    app:layout_constraintEnd_toEndOf="@+id/iv_gold"
+                    app:layout_constraintStart_toStartOf="@+id/iv_gold"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_gold"
+                    tools:text="0" />
+
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/badge_barrier"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="value_bronze,value_silver,value_gold" />
+                <!--endregion -->
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </layout>
