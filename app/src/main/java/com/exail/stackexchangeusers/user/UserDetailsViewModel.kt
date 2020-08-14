@@ -5,13 +5,12 @@ import androidx.lifecycle.*
 import com.exail.stackexchangeusers.core.network.ApiResult
 import com.exail.stackexchangeusers.models.User
 import com.exail.stackexchangeusers.repository.UserRepository
+import com.exail.stackexchangeusers.utils.epochTimeToFormattedString
+import com.exail.stackexchangeusers.utils.nonNullOrBlank
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.util.*
 
 class UserDetailsViewModel @ViewModelInject constructor(private val userRepository: UserRepository) :
     ViewModel() {
-    private val simpleDateFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
     private val userLiveData = MutableLiveData<User>()
     private val loadingLiveData = MutableLiveData<Boolean>()
     private val errorLiveData = MutableLiveData<Int>()
@@ -27,8 +26,10 @@ class UserDetailsViewModel @ViewModelInject constructor(private val userReposito
     val creationLiveData: LiveData<String>
 
     init {
-        profileImageLiveData = Transformations.map(userLiveData) { user -> user.profileImage }
-        nameLiveData = Transformations.map(userLiveData) { user -> user.name }
+        profileImageLiveData =
+            Transformations.map(userLiveData) { user -> user.profileImage }
+        nameLiveData =
+            Transformations.map(userLiveData) { user -> user.name }
         reputationLiveData =
             Transformations.map(userLiveData) { user -> user.reputation.toString() }
         bronzeCountLiveData =
@@ -37,10 +38,12 @@ class UserDetailsViewModel @ViewModelInject constructor(private val userReposito
             Transformations.map(userLiveData) { user -> user.badgeCounts.silver.toString() }
         goldCountLiveData =
             Transformations.map(userLiveData) { user -> user.badgeCounts.gold.toString() }
-        locationLiveData = Transformations.map(userLiveData) { user -> setLocation(user.location) }
-        ageLiveData = Transformations.map(userLiveData) { user -> setAge(user.age) }
+        locationLiveData =
+            Transformations.map(userLiveData) { user -> user.location.nonNullOrBlank() }
+        ageLiveData =
+            Transformations.map(userLiveData) { user -> user.age.nonNullOrBlank() }
         creationLiveData =
-            Transformations.map(userLiveData) { user -> formatEpochTime(user.creationDate) }
+            Transformations.map(userLiveData) { user -> user.creationDate.epochTimeToFormattedString() }
     }
 
     fun getLoadingLiveData(): LiveData<Boolean> = loadingLiveData
@@ -61,17 +64,5 @@ class UserDetailsViewModel @ViewModelInject constructor(private val userReposito
 
     fun setUser(user: User) {
         userLiveData.value = user
-    }
-
-    private fun setLocation(location: String?): String = location ?: "-"
-
-    private fun setAge(age: Int?): String = age?.toString() ?: "-"
-
-    private fun formatEpochTime(epochTime: Long): String {
-        return try {
-            simpleDateFormat.format(Date(epochTime * 1000))
-        } catch (ex: Exception) {
-            epochTime.toString()
-        }
     }
 }
