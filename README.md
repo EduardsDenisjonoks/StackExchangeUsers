@@ -1,6 +1,6 @@
 # StackExchangeUsers
 
-This is a demo app which uses [StackExchange API][0]
+This is a demo app that uses [StackExchange API][0]
 It has two flows, personal and required. The personal approach uses paging 3 library to load a paginated list of users. The required approach uses RxJava2 to load the first 20 users (don't have pagination handling).
 
 Both flows navigate to user details, the personal flow follows a single activity approach but required flow opens user details in the new activity.
