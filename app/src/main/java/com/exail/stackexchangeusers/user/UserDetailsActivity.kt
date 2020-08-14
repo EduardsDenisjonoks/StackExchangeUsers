@@ -32,11 +32,10 @@ class UserDetailsActivity : ActivityBase() {
 
     private fun initToolbar(toolbar: MaterialToolbar) {
         val upListener = AppBarConfiguration.OnNavigateUpListener {
-            val navigated = navController.navigateUp()
-            if (!navigated) {
+            if (!navController.navigateUp()) {
                 onBackPressed()
             }
-            navigated
+            true
         }
         val appBarConfiguration =
             AppBarConfiguration.Builder().setFallbackOnNavigateUpListener(upListener).build()

@@ -1,6 +1,5 @@
 package com.exail.stackexchangeusers.personal.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -36,10 +35,7 @@ class UserPageAdapter(private val showDetails: (User) -> (Unit)) :
 
         init {
             binding.root.setOnClickListener {
-                when (val user = getItem(bindingAdapterPosition)) {
-                    null -> Log.d("UserPageAdapter", "Still loading")
-                    else -> showDetails(user)
-                }
+                getItem(bindingAdapterPosition)?.let { showDetails(it) }
             }
         }
 

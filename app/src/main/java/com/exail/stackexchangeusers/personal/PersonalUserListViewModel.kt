@@ -8,6 +8,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.exail.stackexchangeusers.core.network.ApiConfig
 import com.exail.stackexchangeusers.models.User
 import com.exail.stackexchangeusers.repository.UserPageSource
 import com.exail.stackexchangeusers.repository.UserRepository
@@ -18,7 +19,7 @@ class PersonalUserListViewModel @ViewModelInject constructor(userRepository: Use
 
     val searchQuery = MutableLiveData<String>()
 
-    val users: Flow<PagingData<User>> = Pager(PagingConfig(pageSize = 20)) {
+    val users: Flow<PagingData<User>> = Pager(PagingConfig(ApiConfig.PAGE_SIZE)) {
         UserPageSource(userRepository, searchQuery.value)
     }.flow.cachedIn(viewModelScope)
 

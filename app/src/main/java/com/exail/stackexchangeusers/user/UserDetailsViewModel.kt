@@ -48,13 +48,13 @@ class UserDetailsViewModel @ViewModelInject constructor(private val userReposito
     fun getErrorLiveData(): LiveData<Int> = errorLiveData
 
     fun loadUser(userId: Int) {
-        loadingLiveData.value = true
+        loadingLiveData.postValue(false)
         viewModelScope.launch {
             val result = userRepository.getUser(userId)
-            loadingLiveData.value = false
+            loadingLiveData.postValue(false)
             when (result) {
                 is ApiResult.Success -> setUser(result.data.first())
-                is ApiResult.Error -> errorLiveData.value = result.appError.errorResource
+                is ApiResult.Error -> errorLiveData.postValue(result.appError.errorResource)
             }
         }
     }

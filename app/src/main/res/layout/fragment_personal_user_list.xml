@@ -5,6 +5,7 @@
     tools:context=".personal.PersonalUserListFragment">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.exail.stackexchangeusers.personal.PersonalUserListViewModel" />
@@ -31,9 +32,9 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:hint="@string/hint_search"
-                android:text="@={viewModel.searchQuery}"
                 android:imeOptions="actionSearch"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:text="@={viewModel.searchQuery}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

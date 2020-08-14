@@ -49,8 +49,8 @@ class RequiredUserListViewModel @ViewModelInject constructor(private val userRep
 
     fun fetchUsers() {
         userRepository.getUsersObservable(
-            1,
-            20,
+            ApiConfig.START_PAGE,
+            ApiConfig.PAGE_SIZE,
             ApiConfig.ORDER,
             ApiConfig.SORT,
             searchQuery.value ?: "",

@@ -1,6 +1,7 @@
 package com.exail.stackexchangeusers.repository
 
 import androidx.paging.PagingSource
+import com.exail.stackexchangeusers.core.network.ApiConfig
 import com.exail.stackexchangeusers.core.network.ApiResult
 import com.exail.stackexchangeusers.models.User
 import java.lang.Exception
@@ -14,13 +15,13 @@ class UserPageSource constructor(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, User> {
         try {
-            val nextPage = params.key ?: 1
+            val nextPage = params.key ?: ApiConfig.START_PAGE
             return when (val response =
                 userRepository.getUsers(nextPage, params.loadSize, searchQuery)) {
                 is ApiResult.Success -> {
                     LoadResult.Page(
                         data = response.data.items,
-                        prevKey = if (nextPage == 1) null else nextPage - 1,
+                        prevKey = if (nextPage == ApiConfig.START_PAGE) null else nextPage - 1,
                         nextKey = if (response.data.hasMore) nextPage + 1 else null
                     )
                 }

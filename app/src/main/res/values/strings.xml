@@ -8,7 +8,9 @@
     <string name="title_user">User</string>
 
     <!-- TEXT -->
-    <string name="landing_message">Here will be small description</string>
+    <string name="landing_message">This is a demo app which uses StackExchange API - https://api.stackexchange.com/docs. \n\n
+It has two flows, personal and required. The personal approach uses paging 3 library to load a paginated list of users. The required approach uses RxJava2 to load the first 20 users (don\'t have pagination handling).\n
+Both flows navigate to user details, the personal flow follows a single activity approach but required flow opens user details in the new activity. </string>
 
     <!-- LABELS -->
     <string name="user_name">User Name:</string>

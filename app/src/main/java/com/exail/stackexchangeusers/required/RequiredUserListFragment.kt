@@ -87,9 +87,11 @@ class RequiredUserListFragment : FragmentBase() {
     }
 
     private fun initObservers() {
+        //user data observer
         requiredUserListViewModel.getUserListLiveData().observe(
             viewLifecycleOwner,
             Observer { users -> userAdapter.setUsers(users) })
+        //error observer
         requiredUserListViewModel.getErrorLiveData().observe(
             viewLifecycleOwner,
             Observer { error -> Toast.makeText(context, error, Toast.LENGTH_LONG).show() })
