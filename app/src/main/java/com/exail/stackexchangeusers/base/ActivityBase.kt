@@ -4,6 +4,4 @@ import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-open class ActivityBase : AppCompatActivity() {
-
-}
+open class ActivityBase : AppCompatActivity()

@@ -32,6 +32,4 @@
     <string name="error_service_unavailable">Service unavailable</string>
     <string name="error_invalid_host">Unable to connect host</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

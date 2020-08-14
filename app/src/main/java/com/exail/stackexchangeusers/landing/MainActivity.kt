@@ -9,6 +9,7 @@ import com.exail.stackexchangeusers.R
 import com.exail.stackexchangeusers.base.ActivityBase
 import com.exail.stackexchangeusers.databinding.ActivityMainBinding
 import com.google.android.material.appbar.MaterialToolbar
+
 class MainActivity : ActivityBase() {
 
     private val navController by lazy { findNavController(R.id.nav_host) }

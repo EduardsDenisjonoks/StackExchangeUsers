@@ -18,28 +18,19 @@
 
     <color name="scrim_background">@color/black_32o</color>
     <color name="status_bar">@color/green</color>
-    <color name="bottom_bar">@color/green_dark</color>
 
     <!-- COLORS -->
     <color name="green">#8BC34A</color>
-    <color name="green_light">#CDDC39</color>
     <color name="green_dark">#4CAF50</color>
 
     <color name="purple">#7b1fa2</color>
-    <color name="purple_light">#ae52d4</color>
     <color name="purple_dark">#4a0072</color>
-
-    <color name="grey">#2E2E2E</color>
-    <color name="grey_light">#333333</color>
-    <color name="grey_dark">#191919</color>
 
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
-    <color name="transparent">#00000000</color>
     <color name="red">#d32f2f</color>
 
     <color name="black_32o">#52000000</color>
-    <color name="white_32o">#52ffffff</color>
 
     <color name="bronze">#CD7F32</color>
     <color name="silver">#AAA9AD</color>
