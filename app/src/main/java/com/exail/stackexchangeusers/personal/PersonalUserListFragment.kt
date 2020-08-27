@@ -5,12 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +16,7 @@ import com.exail.stackexchangeusers.R
 import com.exail.stackexchangeusers.base.FragmentBase
 import com.exail.stackexchangeusers.databinding.FragmentPersonalUserListBinding
 import com.exail.stackexchangeusers.models.User
+import com.exail.stackexchangeusers.personal.adapters.UserLoadStateAdapter
 import com.exail.stackexchangeusers.personal.adapters.UserPageAdapter
 import com.exail.stackexchangeusers.utils.hideKeyboard
 import com.google.android.material.button.MaterialButton
@@ -31,20 +30,10 @@ class PersonalUserListFragment : FragmentBase() {
 
     private val navController by lazy { findNavController() }
     private val userPageAdapter by lazy {
-        UserPageAdapter { user -> showUserDetails(user) }.apply {
-            this.addLoadStateListener { loadState ->
-                val error = when {
-                    loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
-                    loadState.append is LoadState.Error -> loadState.append as LoadState.Error
-                    loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
-                    else -> null
-                }
-
-                error?.let {
-                    Toast.makeText(context, R.string.error_something_went_wrong, Toast.LENGTH_LONG).show()
-                }
-            }
-        }
+        UserPageAdapter { user -> showUserDetails(user) }
+    }
+    private val userLoadStateAdapter by lazy {
+        UserLoadStateAdapter { userPageAdapter.retry() }
     }
 
     override fun onCreateView(
@@ -87,8 +76,9 @@ class PersonalUserListFragment : FragmentBase() {
     }
 
     private fun initUserListView(listView: RecyclerView) {
-        listView.adapter = userPageAdapter
+        listView.adapter = userPageAdapter.withLoadStateFooter(userLoadStateAdapter)
         listView.layoutManager = LinearLayoutManager(requireContext())
+        listView.setHasFixedSize(true)
         listView.addItemDecoration(
             DividerItemDecoration(
                 requireContext(),

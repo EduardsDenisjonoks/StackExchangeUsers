@@ -24,6 +24,7 @@ Both flows navigate to user details, the personal flow follows a single activity
     <string name="btn_personal">Personal Approach</string>
     <string name="btn_required">Required Approach</string>
     <string name="btn_search">Search</string>
+    <string name="btn_retry">Retry</string>
 
     <!-- HINT -->
     <string name="hint_search">Search by name…</string>
